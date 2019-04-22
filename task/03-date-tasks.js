@@ -90,7 +90,7 @@ function timeSpanToString(startDate, endDate) {
    var minutes = Math.trunc(milliseconds/1000/60) - hours*60;
    var seconds = Math.trunc(milliseconds/1000) - hours*3600 - minutes*60;
    var milliseconds = milliseconds - hours*60*1000*60 - minutes*60*1000 - seconds*1000;
-   return `${hours.toString().padStart(2,0)}:${minutes.toString().padStart(2,0)}:${seconds.toString().padStart(2,0)}.${milliseconds.toString().padStart(3,0)}`;
+   return `${(hours < 10) ? '0'+hours : hours}:${(minutes < 10) ? '0'+minutes : minutes}:${(seconds < 10) ? '0'+seconds : seconds}.${(milliseconds < 10) ?'00'+milliseconds :(milliseconds < 100) ? '0'+milliseconds : milliseconds}`;
 }
 
 
