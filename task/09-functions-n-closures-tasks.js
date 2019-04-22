@@ -4,7 +4,7 @@
  *                                                                                            *
  * Plese read the following tutorial before implementing tasks:                               *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions                    *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function  *
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Functions  *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments      *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures                           *
  *                                                                                            *
@@ -84,7 +84,10 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    var cached = func();
+    return function() {
+        return cached;
+    }
 }
 
 
