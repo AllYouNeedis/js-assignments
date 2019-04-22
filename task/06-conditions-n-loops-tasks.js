@@ -30,7 +30,10 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 15 == 0) return 'FizzBuzz'; 
+    if (num % 3 == 0) return 'Fizz';
+    if (num % 5 == 0) return 'Buzz';
+    return num; 
 }
 
 
@@ -46,7 +49,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    return (n != 1) ? n * getFactorial(n - 1) : 1;
 }
 
 
@@ -63,7 +66,7 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    return (n1+n2)/2*(n2-n1+1);
 }
 
 
@@ -82,7 +85,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    return (a + b > c && a + c > b && b + c > a);
 }
 
 
@@ -119,7 +122,8 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return !(rect1.left > rect2.left+rect2.width || rect1.left+rect1.width < rect2.left ||
+     rect1.top > rect2.top+rect2.height || rect1.top+rect1.height < rect2.top );
 }
 
 
@@ -150,7 +154,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.hypot( (point.x-circle.center.x), (point.y-circle.center.y) ) < circle.radius;
 }
 
 
@@ -166,7 +170,7 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    return str.split('').filter(x => str.lastIndexOf(x) == str.indexOf(x))[0];
 }
 
 
@@ -192,7 +196,7 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    return `${isStartIncluded ? '[' : '('}${(a>b) ? b : a}, ${(a>b) ? a : b}${isEndIncluded ? ']': ')'}`;
 }
 
 
@@ -209,7 +213,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -226,7 +230,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return +num.toString().split('').reverse().join('');
 }
 
 
@@ -251,8 +255,14 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    return ccn.toString().split('')
+        .reverse()
+        .map( (x) => parseInt(x) )
+        .map( (x,idx) => idx % 2 ? x * 2 : x )
+        .map( (x) => x > 9 ? (x % 10) + 1 : x )
+        .reduce( (accum, x) => accum += x ) % 10 === 0;
 }
+
 
 
 /**
@@ -270,7 +280,11 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    var a = num.toString().split('').map((x) => parseInt(x)).reduce((accum,x) => accum += x,0);
+    if (a < 9)
+        return a;
+    else
+        return getDigitalRoot(a);
 }
 
 
@@ -296,7 +310,13 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let stack = [], open = "([{<", close = ")]}>";
+    for (const ch of str) {
+        let i = open.indexOf(ch);
+        if (i > -1) stack.push(close[i]);
+        if (close.includes(ch) && ch != stack.pop()) return false
+    }
+    return stack.length == 0;
 }
 
 
@@ -356,7 +376,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
@@ -373,6 +393,12 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
+    // var a = pathes[0].split('/');
+    // var pathsize = pathes.reduce((acc,curr) => Math.min(acc,curr.split('/').reduce((prev,cur,i) => (cur.indexOf(a[i]) != -1) ? ++prev : prev,0)),Number.MAX_VALUE);
+    // var outputstr = a.slice(0,pathsize).join('/');
+    // if (pathsize == 1)
+    //     return '/';
+    // return (outputstr.length > 0) ? outputstr+'/' : ''; 
     throw new Error('Not implemented');
 }
 
